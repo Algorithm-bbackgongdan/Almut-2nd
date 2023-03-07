@@ -112,7 +112,7 @@ code
        ㄴ boj_1541.py
        ㄴ boj_1461.py
        ㄴ boj_2138.py   // 백준 문제
-	     ㄴ prog_12345.py // 프로그래머스 문제
+	  ㄴ prog_12345.py // 프로그래머스 문제
        ㄴ README.md     // 1주차 README
 ```
 # 커리큘럼
