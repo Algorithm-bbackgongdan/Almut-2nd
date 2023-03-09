@@ -51,4 +51,27 @@ https://www.acmicpc.net/source/57066182
 
 뭔가 한 가지 테스트케이스만 안 되는 경우, 이처럼 극단적인 경우도 생각해 봐야 한다는 것을 일깨워 주었다.
 
+### 프로그래머스 150368 이모티콘 할인행사
+두 가지 핵심 조건이 있었다.
+1. 가입자를 최대로 할 것
+2. 최대의 판매이익일 것
+
+이 두 가지 조건에서 바로 
+```python
+if register_user_count < user_count:
+    register_user_count = user_count
+    max_price = sum_price
+elif register_user_count == user_count and max_price < sum_price:
+    max_price = sum_price
+```
+를 떠올리게 되었다.
+
+이모티콘의 할인률은 10, 20, 30, 40 딱 네 가지뿐이라는 점과,
+여러 할인률을 적용하여 이모티콘을 판매했을 때 각각의 케이스에서 가입자 수와 총액이 나온다는 점에서
+먼저 이모티콘에 할인을 적용해서, 이모티콘 판매액의 모든 경우의 수를 만들어야 한다고 생각했다.
+
+python 조합을 검색했는데,
+https://theoldface-dev.tistory.com/m/57
+얘가 나와서 해당 코드를 참고했다.
+
 
