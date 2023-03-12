@@ -49,7 +49,7 @@ const solution = (input) => {
   const relayCount = input[1];
   const distanceMap = [];
 
-  // 센서를 2차원 공간에 좌표 순서대로 배열합니다.
+  // 센서를 1차원 공간에 좌표 순서대로 배열합니다.
   const sensorMap = input[2].sort((a, b) => a - b);
 
   // 각 센서 간 거리 배열을 구합니다.
