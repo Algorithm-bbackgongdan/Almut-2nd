@@ -88,7 +88,7 @@
 
 ## 맴버 및 번호
 
-seungwookim99(0) → itsme-shawn(1) → itsnowkim(2) → jonghyeonjo99(3) → asiloveyou(4) → kauthenticity(5)
+[seungwookim99](https://github.com/seungwooKim99)(0) → [itsme-shawn](https://github.com/itsme-shawn)(1) → [itsnowkim](https://github.com/itsnowkim)(2) → [jonghyeonjo99](https://github.com/jonghyeonjo99)(3) → [asiloveyou](https://github.com/asiloveyou)(4) → [kauthenticity](https://github.com/kauthenticity)(5)
 
 ## 코드 리뷰 예시
 
@@ -114,17 +114,17 @@ code
 # 멤버 별 제출 현황
 
 - 총무가 PR 기준으로 월요일마다 업데이트 해주세요!
-- O : 미션 성공
-- X : 미션 실패 (지각, 미제출, 미흡)
+- ✅ : 미션 성공
+- 😥 : 미션 실패 (지각, 미제출, 미흡)
 
-| 멤버          | 1주차 | 2주차 | 3주차 | 4주차 | 5주차 | 6주차 |
-| ------------- | ----- | ----- | ----- | ----- | ----- | ----- |
-| seungwookim99 | O     |       |
-| itsme-shawn   | O     |       |
-| itsnowkim     | O     |       |
-| jonghyeonjo99 | O     |       |
-| asiloveyou    | O     |       |
-| kauthenticity | O     |       |
+| 멤버                                              | 1주차 | 2주차 | 3주차 | 4주차 | 5주차 | 6주차 |
+| ------------------------------------------------- | ----- | ----- | ----- | ----- | ----- | ----- |
+| [seungwookim99](https://github.com/seungwooKim99) | ✅    |       |
+| [itsme-shawn](https://github.com/itsme-shawn)     | ✅    |       |
+| [itsnowkim](https://github.com/itsnowkim)         | ✅    |       |
+| [jonghyeonjo99](https://github.com/jonghyeonjo99) | ✅    |       |
+| [asiloveyou](https://github.com/asiloveyou)       | ✅    |       |
+| [kauthenticity](https://github.com/kauthenticity) | ✅    |       |
 
 # 커리큘럼
 
@@ -132,7 +132,7 @@ code
 
 ## Week 1
 
-- 총무 : seungwooKim99
+- 총무 : s[seungwookim99](https://github.com/seungwooKim99)
 
 ### 1. 그리디
 
@@ -160,7 +160,7 @@ code
 
 ## Week 2
 
-- 총무 : itsme-shawn
+- 총무 : [itsme-shawn](https://github.com/itsme-shawn)
 
 ### 1. BFS/DFS
 
