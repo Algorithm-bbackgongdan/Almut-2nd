@@ -86,24 +86,24 @@ def calculate_bfs(starting_point):
     
     updated = int(people / count)
 
-    # cordinates에 있는 값들 평균값으로 업데이트
-    print('cord : ',cordinates)
-    for x, y in cordinates:
-        graph[x][y] = updated
-    
+    return cordinates, updated
 
 res = 0
 
 while True:
     visited_graph = [[0]*N for _ in range(N)]
     starting_points = check()
-    print(starting_points)
-    for a in graph:
-        print(a)
+    solutions = []
     if len(starting_points) == N*N:
         break
     for point in starting_points:
-        calculate_bfs(point)
+        cordinates, updated = calculate_bfs(point)
+        solutions.append((cordinates, updated))
+
+    # cordinates에 있는 값들 평균값으로 업데이트
+    for cordinates, sol in solutions:
+        for x, y in cordinates:
+            graph[x][y] = sol
     
     res += 1
 
