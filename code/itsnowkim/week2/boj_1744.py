@@ -16,9 +16,6 @@ for _ in range(N):
 positive.sort(reverse=True)
 negative.sort()
 
-# print(positive)
-# print(negative)
-
 # 결과 res에 저장
 res = 0
 
