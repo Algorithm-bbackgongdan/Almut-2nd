@@ -32,8 +32,9 @@ def check(binary):
     if len(bin_num) == 1:
         return True
 
-    half = len(bin_num) // 2
+    half = len(bin_num) // 2  # divde
 
+    # conquer
     # 가운데 수가 1 이면 왼쪽그룹 과 오른쪽그룹 재귀적으로 검사
     if bin_num[half] == "1":
         left_check = check(bin_num[:half])  # 왼쪽그룹 check
@@ -46,6 +47,7 @@ def check(binary):
         else:
             return True
 
+    # combine
     # 왼쯕그룹과 오른쪽그룹 검사 결과가 둘 다 True 이면 최종 True
     if left_check and right_check:
         return True
