@@ -119,12 +119,12 @@ code
 
 | 멤버                                              | 1주차 | 2주차 | 3주차 | 4주차 | 5주차 | 6주차 |
 | ------------------------------------------------- | ----- | ----- | ----- | ----- | ----- | ----- |
-| [seungwookim99](https://github.com/seungwooKim99) | ✅    |       |
-| [itsme-shawn](https://github.com/itsme-shawn)     | ✅    |       |
-| [itsnowkim](https://github.com/itsnowkim)         | ✅    |       |
-| [jonghyeonjo99](https://github.com/jonghyeonjo99) | ✅    |       |
-| [asiloveyou](https://github.com/asiloveyou)       | ✅    |       |
-| [kauthenticity](https://github.com/kauthenticity) | ✅    |       |
+| [seungwookim99](https://github.com/seungwooKim99) | ✅    | ✅    |
+| [itsme-shawn](https://github.com/itsme-shawn)     | ✅    | ✅    |
+| [itsnowkim](https://github.com/itsnowkim)         | ✅    | ✅    |
+| [jonghyeonjo99](https://github.com/jonghyeonjo99) | ✅    | ✅    |
+| [asiloveyou](https://github.com/asiloveyou)       | ✅    | ✅    |
+| [kauthenticity](https://github.com/kauthenticity) | ✅    | ✅    |
 
 # 커리큘럼
 
@@ -185,3 +185,31 @@ code
 - 문제정보 : 표현 가능한 이진트리
 - 출처 : 프로그래머스 (2023 KAKAO BLIND RECRUITMENT)
 - 링크 : https://school.programmers.co.kr/learn/courses/30/lessons/150367
+
+## Week 3
+
+- 총무 : [itsnowkim](https://github.com/itsnowkim)
+
+### 1. 이진탐색
+
+- 문제정보 : 기타 레슨(2343)
+- 출처 : 백준
+- 링크 : https://www.acmicpc.net/problem/2343
+
+### 2. DP
+
+- 문제정보 : 자두나무(2240)
+- 출처 : 백준
+- 링크 : https://www.acmicpc.net/problem/2240
+
+### 3. 실전문제 1
+
+- 문제정보 : 미로 탈출 명령어
+- 출처 : 프로그래머스 (2023 KAKAO BLIND RECRUITMENT)
+- 링크 : https://school.programmers.co.kr/learn/courses/30/lessons/150365
+
+### 4. 실전문제 2
+
+- 문제정보 : 두 큐 합 같게 만들기
+- 출처 : 프로그래머스 (2023 KAKAO BLIND RECRUITMENT)
+- 링크 : https://school.programmers.co.kr/learn/courses/30/lessons/118667
