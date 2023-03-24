@@ -161,6 +161,106 @@ function solution(input) {
   }
   return ans;
 }
+```
 
+### backjoon-150365
+
+풀이시간: 1h30m
+Greedy로 풀이하는 문제라고 전혀 예상하지 못했습니다.
+특히 DFS/BFS로 풀이할 경우 예상 시간복잡도가 50(가로) * 50(세로) * 2500(최대 길이)이므로 (모든 셀을 2500씩 방문)
+6,250,000이 되어 10^7의 범위 내로 포함될 것 처럼 보이기 때문인 것 같습니다. 
+따라서, 아이디어가 뒷받침 된다면 쉽게 풀이할 수 있는 문제인 듯 합니다.
+
+### 어려웠던 부분
+
+- Greedy 접근으로 풀이하는데 어려움이 있었습니다.
+- 에러 케이스 예측이 어려웠습니다. (도달할 수 없는 경우)
+
+### 풀이 방법
+
+- 우선, 에러 케이스에 따라 early return을 시도합니다.
+- 알파벳 순서대로 'dl' 패턴을 먼저 시도하여 좌측 코너로 이동합니다.
+- 이후 'rl' 패턴을 시도하여 코너 지점에서 좌우 이동을 반복합니다.
+- 목표 지점 도달에 필요한 최소 step에 이를 경우, 목표 지점으로 이동합니다.
+
+### 풀이 로직
+
+```javascript
+
+function solution(n, m, x, y, r, c, k) {
+  let [currentX, currentY, maxX, maxY, targetX, targetY, step] = [
+    y,
+    x,
+    m,
+    n,
+    c,
+    r,
+    k,
+  ];
+  let ans = "";
+  let dist = getDistance([currentX, currentY], [targetX, targetY]);
+
+  // [1] 도달할 수 없는 경우 "impossible"을 반환합니다
+  const distRemain = dist % 2;
+  const stepRemain = step % 2;
+  if (distRemain !== stepRemain) return "impossible";
+  if (dist > step) return "impossible";
+
+  // [2] 가능한 dl 패턴을 모두 시도합니다
+  while (dist < step) {
+    if (currentY !== maxY) {
+      ans += "d";
+      currentY++;
+    } else if (currentX !== 1) {
+      ans += "l";
+      currentX--;
+    } else {
+      break;
+    }
+    dist = getDistance([currentX, currentY], [targetX, targetY]);
+    step--;
+  }
+
+  // [3] 가능한 rl 패턴을 모두 시도합니다
+  let moveRight = true;
+  while (dist < step) {
+    if (moveRight) {
+      ans += "r";
+      moveRight = !moveRight;
+      currentX += 1;
+    } else {
+      ans += "l";
+      moveRight = !moveRight;
+      currentX -= 1;
+    }
+    dist = getDistance([currentX, currentY], [targetX, targetY]);
+    step--;
+  }
+
+  // [4] 목적지로 이동합니다
+  if (step) {
+    const xDist = targetX - currentX;
+    const yDist = targetY - currentY;
+    if (yDist > 0) {
+      ans += "d".repeat(Math.abs(yDist));
+    }
+    if (xDist < 0) {
+      ans += "l".repeat(Math.abs(xDist));
+    }
+    if (xDist > 0) {
+      ans += "r".repeat(Math.abs(xDist));
+    }
+    if (yDist < 0) {
+      ans += "u".repeat(Math.abs(yDist));
+    }
+  }
+  return ans;
+}
+
+function getDistance(current, target) {
+  const [cx, cy] = current;
+  const [tx, ty] = target;
+  return Math.abs(cx - tx) + Math.abs(cy - ty);
+}
 
 ```
