@@ -264,3 +264,60 @@ function getDistance(current, target) {
 }
 
 ```
+
+### backjoon-118667
+
+풀이시간: 30m
+투 포인터로 간단하게 풀이할 수 있었습니다.
+
+### 어려웠던 부분
+
+N/A
+
+### 풀이 방법
+
+- 두 큐를 하나로 합칩니다.
+- 좌측 큐(queue1)을 기준으로 start, end 포인터를 결정합니다.
+- start, end 포인터가 역전되기 전까지 루프를 반복합니다.
+- 조건에 따라 start, end 포인터를 증가시키며 현재 합을 업데이트 합니다.
+  - 현재 합이 목표보다 작으면 end 포인터를 증가합니다.  
+  - 현재 합이 목표보다 크면 start 포인터를 증가합니다.
+- 현재 합이 목표(queue의 합의 평균)에 도달할 경우 루프를 종료합니다.
+
+### 풀이 로직
+
+```javascript
+
+function solution(queue1, queue2) {
+  // [1] queue를 하나로 합친 뒤 현재 합을 나타내는 포인터를 start, end로 정합니다
+  let start = 0;
+  let end = queue1.length - 1;
+  let queue = queue1.concat(queue2);
+  let step = 0;
+  let current = queue1.reduce((acc, v) => acc + v, 0);
+  const target = queue.reduce((acc, v) => acc + v, 0) / 2;
+  const length = queue.length;
+
+  // [2] start, end가 역전되거나, 끝에 도달하기 전까지 반복합니다
+  while (start <= end && start < length && end < length) {
+    // [3] current(현재 합)이 목표보다 큰 경우 start 포인터를 증가시킵니다
+    if (current > target) {
+      current -= queue[start];
+      start++;
+      step++;
+      // [4] current(현재 합)이 목표보다 작은 경우 end 포인터를 증가시킵니다
+    } else if (current < target) {
+      end++;
+      current += queue[end];
+      step++;
+      // [5] current(현재 합)이 목표와 같은 경우 step을 반환합니다
+    } else if (current === target) {
+      return step;
+    }
+  }
+
+  // [6] current(현재 합)이 목표에 도달하지 못한 경우 -1을 반환합니다
+  return -1;
+}
+
+```
