@@ -119,12 +119,12 @@ code
 
 | 멤버                                              | 1주차 | 2주차 | 3주차 | 4주차 | 5주차 | 6주차 |
 | ------------------------------------------------- | ----- | ----- | ----- | ----- | ----- | ----- |
-| [seungwookim99](https://github.com/seungwooKim99) | ✅    | ✅    |
-| [itsme-shawn](https://github.com/itsme-shawn)     | ✅    | ✅    |
-| [itsnowkim](https://github.com/itsnowkim)         | ✅    | ✅    |
-| [jonghyeonjo99](https://github.com/jonghyeonjo99) | ✅    | ✅    |
-| [asiloveyou](https://github.com/asiloveyou)       | ✅    | ✅    |
-| [kauthenticity](https://github.com/kauthenticity) | ✅    | ✅    |
+| [seungwookim99](https://github.com/seungwooKim99) | ✅    | ✅    |✅    |
+| [itsme-shawn](https://github.com/itsme-shawn)     | ✅    | ✅    |✅    |
+| [itsnowkim](https://github.com/itsnowkim)         | ✅    | ✅    |✅    |
+| [jonghyeonjo99](https://github.com/jonghyeonjo99) | ✅    | ✅    |✅    |
+| [asiloveyou](https://github.com/asiloveyou)       | ✅    | ✅    |✅    |
+| [kauthenticity](https://github.com/kauthenticity) | ✅    | ✅    |✅    |
 
 # 커리큘럼
 
@@ -213,3 +213,31 @@ code
 - 문제정보 : 두 큐 합 같게 만들기
 - 출처 : 프로그래머스 (2022 KAKAO TECH INTERNSHIP)
 - 링크 : https://school.programmers.co.kr/learn/courses/30/lessons/118667
+
+## Week 4
+
+- 총무 : jonghyeonjo99(https://github.com/jonghyeonjo99)
+
+### 1. 최단거리 (다익스트라)
+
+- 문제정보 : 최소비용 구하기2 (11779)
+- 출처 : 백준
+- 링크 : https://www.acmicpc.net/problem/11779
+
+### 2. 최단거리 (플로이드-워셜)
+
+- 문제정보 : 운동 (1956)
+- 출처 : 백준
+- 링크 : https://www.acmicpc.net/problem/1956
+
+### 3. 실전문제 1
+
+- 문제정보 : 주차 요금 계산 (92341)
+- 출처 : 프로그래머스 (2022 KAKAO BLIND RECRUITMENT)
+- 링크 : https://school.programmers.co.kr/learn/courses/30/lessons/92341
+
+### 4. 실전문제 2
+
+- 문제정보 : 양궁대회 (92342)
+- 출처 : 프로그래머스 (2022 KAKAO BLIND RECRUITMENT)
+- 링크 : https://school.programmers.co.kr/learn/courses/30/lessons/92342
