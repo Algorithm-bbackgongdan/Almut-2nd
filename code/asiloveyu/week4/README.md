@@ -68,3 +68,79 @@ function solution(input) {
   return ans;
 }
 ```
+
+## backjoon-1956
+
+풀이시간: 1h
+플로이드 알고리즘을 이해하는 데 다소 시간이 소모되었습니다.
+이상한 지점이 있는데 중간 경로(m)의 nested loop 상 위치가 최상단 / 최하단에 있어도 둘다 통과가 된다는 점 입니다.
+```javascript
+/// 최상단인 경우
+ for (let m = 1; m < v + 1; m++) {
+    for (let y = 1; y < v + 1; y++) {
+      for (let x = 1; x < v + 1; x++) {
+        mat[y][x] = Math.min(mat[y][x], mat[y][m] + mat[m][x]);
+      }
+    }
+  }
+
+/// 최하단인 경우
+  for (let y = 1; y < v + 1; y++) {
+    for (let x = 1; x < v + 1; x++) {
+      for (let m = 1; m < v + 1; m++) {
+        mat[y][x] = Math.min(mat[y][x], mat[y][m] + mat[m][x]);
+      }
+    }
+  }
+```
+논리적으로는 결과가 달라야 할 것 같은데 (x, y = 1 인 경우와 x, y = v + 1 인 경우 각 최소 경로가 다르므로) 
+혹시 아이디어가 있다면 공유 주시면 감사하겠습니다.
+
+### 어려웠던 부분
+
+- 플로이드 알고리즘을 이해하는데 어려움이 있었습니다.
+  
+### 풀이 방법
+
+- 주어진 도로들을 기반으로 경로 매트릭스를 생성합니다.
+- 경로 매트릭스에 대해 플로이드 W. 알고리즘을 토대로 최단 경로를 구합니다.
+- 자기 자신으로 향하는 최단 거리를 구합니다.
+
+### 풀이 로직
+
+```javascript
+
+function solution(input) {
+  const [[v, e], ...routes] = input;
+  const MAX = Number.MAX_VALUE;
+  const mat = new Array(v + 1).fill(0).map((_) => new Array(v + 1).fill(MAX));
+
+  // [1] 각 도로를 기반으로 경로 매트릭스를 생성합니다
+  routes.forEach((route) => {
+    const [start, end, cost] = route;
+    mat[start][end] = cost;
+  });
+
+  // [2] 경로 매트릭스에 대해 최단거리를 구합니다
+  for (let m = 1; m < v + 1; m++) {
+    for (let y = 1; y < v + 1; y++) {
+      for (let x = 1; x < v + 1; x++) {
+        mat[y][x] = Math.min(mat[y][x], mat[y][m] + mat[m][x]);
+      }
+    }
+  }
+
+  // [3] 자기 자신으로 향하는 최단거리 중 가장 작은 값을 고릅니다
+  let min = MAX;
+  for (let e = 1; e < v + 1; e++) {
+    if (mat[e][e] !== MAX && mat[e][e] < min) {
+      min = mat[e][e];
+    }
+  }
+  if (min === MAX) {
+    return -1;
+  }
+  return min;
+}
+
+```
