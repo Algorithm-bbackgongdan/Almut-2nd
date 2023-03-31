@@ -224,3 +224,118 @@ function getMinute(time) {
 }
 
 ```
+
+## programmers-92342
+
+풀이시간: 1h30m
+마찬가지로 문제를 읽고 이해하는데 오랜 시간이 소모되었습니다.
+문제의 틀은 금방 완성했는데, 예상보다 오류 케이스가 많아 이를 고민하는데도 시간 소모가 많았습니다.
+
+### 어려웠던 부분
+
+- 답안을 구성하며 고려하지 못한 예외 케이스 찾기 (무지와 라이언이 비기는 케이스 등)
+
+### 풀이 방법
+
+- dfs로 매 시행에서 (1) 이기거나 (2) 지는(비기는) 두가지 케이스로 재귀 탐색합니다 (O(2^10))
+- 끝에 도달하는 경우 결과륿 반환합니다
+  - 인덱스가 10에 도달할 경우 결과(라이언 점수, 어피치 점수, 라이언 기록)를 반환합니다
+  - 화살이 모두 떨어질 경우 어피치의 점수를 업데이트 한 뒤 결과를 반환합니다
+- 재귀 결과를 역순으로 비교하며 반환합니다
+  - 두 케이스 중 점수차가 높은 경우를 반환합니다
+  - 두 케이스의 점수차가 같은 경우 '가장' 작은 값이 더 많은 경우를 반환합니다
+
+### 풀이 로직
+
+```javascript
+function solution(n, info) {
+  const lion = new Array(11).fill(0);
+  const [lionScore, peachScore, lionArray] = dfs(lion, info, n, 0, 0, 0);
+
+  if (lionScore <= peachScore) {
+    return [-1];
+  } else {
+    return lionArray;
+  }
+}
+
+// dfs 수행 함수
+function dfs(lion, peach, arrow, index, lionScore, peachScore) {
+  // [1] 마지막인 경우
+  if (index === 10) {
+    const newLion = [...lion];
+    newLion[index] = arrow;
+    return [lionScore, peachScore, newLion];
+  }
+  if (arrow === 0) {
+    for (let i = index; i < 11; i++) {
+      if (peach[i] > 0) peachScore += 10 - i;
+    }
+    return [lionScore, peachScore, lion];
+  }
+
+  let winCase, loseCase;
+
+  // [2] 라이언이 해당 점수에서 이기는 경우
+  const remainArrow = arrow - (peach[index] + 1);
+  // [2-1] 사용가능한 화살이 피치보다 많은 경우에 수행
+  if (remainArrow >= 0) {
+    const newLion = [...lion];
+    newLion[index] = peach[index] + 1;
+    winCase = dfs(
+      newLion,
+      peach,
+      remainArrow,
+      index + 1,
+      lionScore + (10 - index),
+      peachScore
+    );
+  }
+
+  // [2] 라이언이 해당 점수에서 지는(비기는) 경우
+  if (peach[index] !== 0) {
+    loseCase = dfs(
+      lion,
+      peach,
+      arrow,
+      index + 1,
+      lionScore,
+      peachScore + (10 - index)
+    );
+  } else {
+    loseCase = dfs(lion, peach, arrow, index + 1, lionScore, peachScore);
+  }
+
+  // [3] 최적값 반환
+  // [3-1] 라이언이 해당 점수에서 이길 수 없는 경우
+  if (!winCase) return loseCase;
+  // [3-2] 라이언이 더 큰 점수차로 이기는 경우를 반환
+  const [winLionScore, winPeachScore] = winCase;
+  const [loseLionScore, losePeachScore] = loseCase;
+  const winScoreGap = winLionScore - winPeachScore;
+  const loseScoreGap = loseLionScore - losePeachScore;
+
+  if (winScoreGap !== loseScoreGap) {
+    return winScoreGap > loseScoreGap ? winCase : loseCase;
+    // [3-3] 점수차가 같은 경우 낮은 값이 더 많은 경우를 반환
+  } else if (winScoreGap === loseScoreGap) {
+    return getSkewedArray(winCase, loseCase);
+  }
+}
+
+// 두 배열 중 낮은 값이 더 많은 배열을 반환
+function getSkewedArray(inputOne, inputTwo) {
+  const arrOne = inputOne[2];
+  const arrTwo = inputTwo[2];
+
+  for (let i = 10; i >= 0; i--) {
+    if (arrOne[i] > arrTwo[i]) {
+      return inputOne;
+    } else if (arrTwo[i] > arrOne[i]) {
+      return inputTwo;
+    }
+  }
+  return arrOne;
+}
+
+```
