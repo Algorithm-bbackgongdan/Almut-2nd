@@ -4,7 +4,7 @@ def solution(n, info):
     print(info)
     possible_answer = []
     result = []
-    ryan_possible_info = []  # 10점 ~ 1점
+    ryan_possible_info = []  # 10점 ~ 0점
     for i in range(len(info)):
         ryan_possible_info.append([0, info[i] + 1])
 
