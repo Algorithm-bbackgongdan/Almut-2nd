@@ -216,7 +216,7 @@ code
 
 ## Week 4
 
-- 총무 : jonghyeonjo99(https://github.com/jonghyeonjo99)
+- 총무 : [jonghyeonjo99] (https://github.com/jonghyeonjo99)
 
 ### 1. 최단거리 (다익스트라)
 
