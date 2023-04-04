@@ -119,12 +119,12 @@ code
 
 | 멤버                                              | 1주차 | 2주차 | 3주차 | 4주차 | 5주차 | 6주차 |
 | ------------------------------------------------- | ----- | ----- | ----- | ----- | ----- | ----- |
-| [seungwookim99](https://github.com/seungwooKim99) | ✅    | ✅    |✅    |
-| [itsme-shawn](https://github.com/itsme-shawn)     | ✅    | ✅    |✅    |
-| [itsnowkim](https://github.com/itsnowkim)         | ✅    | ✅    |✅    |
-| [jonghyeonjo99](https://github.com/jonghyeonjo99) | ✅    | ✅    |✅    |
-| [asiloveyou](https://github.com/asiloveyou)       | ✅    | ✅    |✅    |
-| [kauthenticity](https://github.com/kauthenticity) | ✅    | ✅    |✅    |
+| [seungwookim99](https://github.com/seungwooKim99) | ✅    | ✅    |✅     |✅     |
+| [itsme-shawn](https://github.com/itsme-shawn)     | ✅    | ✅    |✅     |✅     |
+| [itsnowkim](https://github.com/itsnowkim)         | ✅    | ✅    |✅     |✅     |
+| [jonghyeonjo99](https://github.com/jonghyeonjo99) | ✅    | ✅    |✅     |✅     |
+| [asiloveyou](https://github.com/asiloveyou)       | ✅    | ✅    |✅     |✅     |
+| [kauthenticity](https://github.com/kauthenticity) | ✅    | ✅    |✅     |✅     |
 
 # 커리큘럼
 
