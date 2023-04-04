@@ -241,3 +241,31 @@ code
 - 문제정보 : 양궁대회 (92342)
 - 출처 : 프로그래머스 (2022 KAKAO BLIND RECRUITMENT)
 - 링크 : https://school.programmers.co.kr/learn/courses/30/lessons/92342
+
+## Week 5
+
+- 총무 : [asiloveyou](https://github.com/asiloveyou)
+
+### 1. 그래프 이론 (위상정렬)
+
+- 문제정보 : 최종순위 (3665)
+- 출처 : 백준
+- 링크 : https://www.acmicpc.net/problem/3665
+
+### 2. 그래프 이론 (Kruskal, Union-Find, ...)
+
+- 문제정보 : 다리 만들기 2 (17472)
+- 출처 : 백준 (삼성 기출)
+- 링크 : https://www.acmicpc.net/problem/17472
+
+### 3. 실전문제 1
+
+- 문제정보 : 어른 상어 (19237)
+- 출처 : 백준 (삼성 기출)
+- 링크 : https://www.acmicpc.net/problem/19237
+
+### 4. 실전문제 2
+
+- 문제정보 : 원판돌리기 (17822) 
+- 출처 : 백준 (삼성 기출)
+- 링크 : https://www.acmicpc.net/problem/17822
