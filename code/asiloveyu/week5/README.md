@@ -249,3 +249,198 @@ function fillIsland(start, flag, direction, map, w, h) {
 }
 
 ```
+
+## backjoon-19237
+
+풀이시간: 3h30m
+문제를 이해하고 실제로 구현하는데 오랜 시간이 걸렸습니다. 
+풀이 자체는 사실 문제만 따라 구현하면 되서 어렵지는 않았지만,
+코드가 워낙 방대하고 디버깅이 어렵다 보니 사소한 실수도 원인을 파악하는데 오랜 시간이 걸렸습니다.
+저의 경우, 끝에서 시간(t) 인덱스 관리를 잘못해 한 40분 헤맨 것 같습니다.
+
+### 어려웠던 부분
+
+- 문제를 이해하고 해결책을 체계적으로 구조화하는데 어려움이 있었습니다.
+
+### 풀이 방법
+
+- 주어진 순위를 기준으로 방향 그래프와 inDegree 배열을 생성합니다.
+- 새로운 방향을 기준으로 그래프를 업데이트 합니다. (승자를 기준으로)
+- zeroInDegreeSet을 초기화하고 배열의 값을 꺼냅니다.
+- 해당 값을 기준으로 정답 배열에 하나씩 inDegree가 0인 vertex를 추가합니다.
+- 정답 배열을 반환합니다.
+
+### 풀이 로직
+
+```javascript
+// [*] 상어 클래스 입니다
+class Shark {
+  id;
+  alive;
+  position;
+  rotation;
+  directionSet;
+
+  constructor(id) {
+    this.id = id;
+    this.alive = true;
+  }
+
+  kill() {
+    this.alive = false;
+  }
+
+  set rotation(value) {
+    this.rotation = value;
+  }
+  set position(value) {
+    this.position = value;
+  }
+  set directionSet(value) {
+    this.directionSet = value;
+  }
+}
+
+// [*] 지도의 개별 셀 클래스 입니다
+class mapCell {
+  constructor(occupient, time) {
+    this.occupient = occupient;
+    this.time = time;
+  }
+}
+
+function solution(input) {
+  const map = [];
+  let sharks = [];
+  let rows = 0;
+  const [N, M, K] = input[rows++];
+
+  // [1] 지도의 개별 셀 객체(냄새, 타이머)와 상어를 초기화합니다
+  let y = 0;
+  while (rows <= N) {
+    const row = input[rows++];
+    const mapRow = [];
+
+    row.forEach((value, x) => {
+      if (value !== 0) {
+        const shark = new Shark(value);
+        shark.position = [x, y];
+        sharks.push(shark);
+        mapRow.push(new mapCell(value, K));
+      } else {
+        mapRow.push(new mapCell(value, 0));
+      }
+    });
+    map.push(mapRow);
+    y++;
+  }
+
+  // [2] 상어를 id 순으로 오름차순 정렬합니다 (1, 2, 3, 4)
+  sharks = sharks.sort((sharkA, sharkB) => {
+    return sharkA.id - sharkB.id;
+  });
+
+  // [3] 상어의 최초 회전 방향을 초기화합니다
+  const initialRotation = input[rows++];
+  sharks.forEach((shark, id) => {
+    shark.rotation = initialRotation[id];
+  });
+
+  // [4] 상어의 회전 우선순위를 초기화합니다
+  let index = 0;
+  while (rows !== N + 2 + M * 4) {
+    const up = input[rows++];
+    const down = input[rows++];
+    const left = input[rows++];
+    const right = input[rows++];
+
+    // [4-1] 회전방향 인덱스 (1, 2, 3, 4)와 배열 인덱스를 맞추어줍니다
+    sharks[index].directionSet = [null, up, down, left, right];
+    index++;
+  }
+
+  // [5] 시간에 맞추어 하나씩 증가시키며 상어의 위치를 업데이트합니다
+  let t = 0;
+  while (t <= 999) {
+    // [5-1] 상어의 회전 방향을 결정하고 이동 후 위치를 업데이트 합니다
+    for (const shark of sharks) {
+      makeMovement(shark, map, N);
+    }
+
+    // [5-2] 지도의 모든 타이머를 1씩 감소시킵니다
+    for (let x = 0; x < N; x++) {
+      for (let y = 0; y < N; y++) {
+        map[y][x].time > 0 && map[y][x].time--;
+        if (map[y][x].time === 0) {
+          map[y][x].occupient = 0;
+        }
+      }
+    }
+
+    // [5-3] 중복된 상어를 제거합니다
+    for (const shark of sharks) {
+      const [x, y] = shark.position;
+      // [5-3-1] 새로운 셀에 중복된 상어가 있는 경우, 상어를 죽입니다 (불쌍하네요)
+      if (map[y][x].occupient !== 0 && map[y][x].occupient !== shark.id) {
+        shark.kill();
+      } else {
+        // [5-3-2] 새로운 셀에 중복된 상어가 없는 경우 위치를 업데이트 합니다
+        map[y][x].occupient = shark.id;
+        map[y][x].time = K;
+      }
+    }
+
+    // [5-4] 죽인 상어를 배열에서 제거합니다
+    sharks = sharks.filter((shark) => {
+      return shark.alive === true;
+    });
+
+    // [5-5] 시간을 증가시키고, 상어의 길이가 1인 경우 결과를 반환합니다
+    t++;
+    if (sharks.length === 1) {
+      return t;
+    }
+  }
+  return -1;
+}
+
+// [*] 현재 회전상태(rotation)에 따라 방향 집합(directionSet)에서
+//     방향 순서(directionOrder)를 추출한 뒤 이를 기준으로 움직입니다
+function makeMovement(shark, map, N) {
+  const dpos = [null, [0, -1], [0, 1], [-1, 0], [1, 0]];
+  const currentRotation = shark.rotation;
+  const currentDirectionOrder = shark.directionSet[currentRotation];
+  const [x, y] = shark.position;
+
+  // [1] 빈 공간 찾기
+  for (const i of currentDirectionOrder) {
+    const [dx, dy] = dpos[i];
+    const [nx, ny] = [x + dx, y + dy];
+    if (nx >= N || nx < 0) continue;
+    if (ny >= N || ny < 0) continue;
+
+    // [1-1] 상어 객체 업데이트
+    if (map[ny][nx].occupient === 0) {
+      shark.position = [nx, ny];
+      shark.rotation = i;
+      return;
+    }
+  }
+
+  // [2] 지나온 공간 찾기
+  for (const i of currentDirectionOrder) {
+    const [dx, dy] = dpos[i];
+    const [nx, ny] = [x + dx, y + dy];
+    if (nx >= N || nx < 0) continue;
+    if (ny >= N || ny < 0) continue;
+
+    // [2-1] 상어 객체 업데이트
+    if (map[ny][nx].occupient === shark.id) {
+      shark.position = [nx, ny];
+      shark.rotation = i;
+      return;
+    }
+  }
+}
+
+```
