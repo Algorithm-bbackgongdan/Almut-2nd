@@ -119,12 +119,12 @@ code
 
 | 멤버                                              | 1주차 | 2주차 | 3주차 | 4주차 | 5주차 | 6주차 |
 | ------------------------------------------------- | ----- | ----- | ----- | ----- | ----- | ----- |
-| [seungwookim99](https://github.com/seungwooKim99) | ✅    | ✅    |✅     |✅     |
-| [itsme-shawn](https://github.com/itsme-shawn)     | ✅    | ✅    |✅     |✅     |
-| [itsnowkim](https://github.com/itsnowkim)         | ✅    | ✅    |✅     |✅     |
-| [jonghyeonjo99](https://github.com/jonghyeonjo99) | ✅    | ✅    |✅     |✅     |
-| [asiloveyou](https://github.com/asiloveyou)       | ✅    | ✅    |✅     |✅     |
-| [kauthenticity](https://github.com/kauthenticity) | ✅    | ✅    |✅     |✅     |
+| [seungwookim99](https://github.com/seungwooKim99) | ✅    | ✅    |✅     |✅     |✅     |
+| [itsme-shawn](https://github.com/itsme-shawn)     | ✅    | ✅    |✅     |✅     |✅     |
+| [itsnowkim](https://github.com/itsnowkim)         | ✅    | ✅    |✅     |✅     |✅     |
+| [jonghyeonjo99](https://github.com/jonghyeonjo99) | ✅    | ✅    |✅     |✅     |✅     |
+| [asiloveyou](https://github.com/asiloveyou)       | ✅    | ✅    |✅     |✅     |✅     |
+| [kauthenticity](https://github.com/kauthenticity) | ✅    | ✅    |✅     |✅     |😥     |
 
 # 커리큘럼
 
@@ -269,3 +269,24 @@ code
 - 문제정보 : 원판돌리기 (17822) 
 - 출처 : 백준 (삼성 기출)
 - 링크 : https://www.acmicpc.net/problem/17822
+
+## Week 6
+
+- 총무 : [kauthenticity](https://github.com/kauthenticity)
+
+### 1. 실전문제 1 
+- 문제정보 : 양과 늑대 (92343)
+- 출처 : 프로그래머스
+- 링크 : https://school.programmers.co.kr/learn/courses/30/lessons/92343
+
+### 2. 실전문제 2
+
+- 문제정보 : 조이스틱 (42860)
+- 출처 : 프로그래머스
+- 링크 : https://school.programmers.co.kr/learn/courses/30/lessons/42860
+
+### 3. 실전문제 3
+
+- 문제정보 : 경주로 건설 (67259)
+- 출처 : 프로그래머스
+- 링크 : https://school.programmers.co.kr/learn/courses/30/lessons/67259
