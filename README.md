@@ -123,7 +123,7 @@ code
 | [itsme-shawn](https://github.com/itsme-shawn)     | ✅    | ✅    |✅     |✅     |✅     |
 | [itsnowkim](https://github.com/itsnowkim)         | ✅    | ✅    |✅     |✅     |✅     |
 | [jonghyeonjo99](https://github.com/jonghyeonjo99) | ✅    | ✅    |✅     |✅     |✅     |
-| [asiloveyou](https://github.com/asiloveyou)       | ✅    | ✅    |✅     |✅     |✅     |
+| [asiloveyou](https://github.com/asiloveyou)       | ✅    | ✅    |✅     |✅     |😥     |
 | [kauthenticity](https://github.com/kauthenticity) | ✅    | ✅    |✅     |✅     |😥     |
 
 # 커리큘럼
