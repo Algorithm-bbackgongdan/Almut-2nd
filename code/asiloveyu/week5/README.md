@@ -444,3 +444,157 @@ function makeMovement(shark, map, N) {
 }
 
 ```
+
+## backjoon-3665
+
+풀이시간: infty
+마지막에 average를 구한 뒤 sum을 업데이트 하지 않아 한 3시간(?)을 사용한 것 같습니다.
+그렇게 어려운 문제는 아닌 것 같은데..
+정말이지..백준 야속해요. 테케 좀 그냥 알려주지. 그래도 풀이해서 기쁩니다.
+
+### 어려웠던 부분
+
+- DFS로 풀이 시 난해한 부분이 많아 queue를 구현하는데 까지 시간이 오래 걸렸습니다.
+- 디버깅 과정에서 올바른 결과를 뇌로 시뮬레이션 하는데 오랜 시간이 걸렸습니다.
+
+### 풀이 방법
+
+- 시간이 지남에 따라 원판을 회전합니다.
+- bfs를 이용해 인접 행렬을 0으로 초기화합니다.
+- 인접 값의 개수가 0일 경우 평균을 구한 뒤 값을 업데이트합니다.
+- 연산의 최종 결과를 계산해서 반환합니다.
+
+### 풀이 로직
+
+```javascript
+
+class Queue {
+  constructor() {
+    this.queue = [];
+    this.head = 0;
+    this.tail = 0;
+  }
+  enqueue(value) {
+    this.queue.push(value);
+    this.head++;
+  }
+  dequeue() {
+    if (this.tail > this.head) return;
+    const value = this.queue[this.tail];
+    this.tail++;
+    return value;
+  }
+  length() {
+    return this.head - this.tail;
+  }
+}
+
+function solution(input) {
+  let cursor = 0;
+  const [N, M, T] = input[cursor++];
+  const board = [[]];
+  const info = [];
+  while (cursor < N + 1) {
+    board.push(input[cursor++]);
+  }
+  while (cursor < N + T + 1) {
+    info.push(input[cursor++]);
+  }
+  let time = 0;
+  while (time < T) {
+    rotate(info[time], board, N, M);
+    let adjacentCount = 0;
+    let numberCount = 0;
+    let sum = 0;
+
+    for (let b = 1; b <= N; b++) {
+      for (let i = 0; i < M; i++) {
+        if (board[b][i] > 0) {
+          adjacentCount += bfs([b, i], board, N, M);
+          sum += board[b][i];
+          numberCount += 1;
+        }
+      }
+    }
+    if (adjacentCount === 0 && numberCount !== 0) {
+      let boardAvg = sum / numberCount;
+      for (let b = 1; b <= N; b++) {
+        for (let i = 0; i < M; i++) {
+          if (board[b][i] === 0) continue;
+          if (board[b][i] > boardAvg) {
+            board[b][i]--;
+          } else if (board[b][i] < boardAvg) {
+            board[b][i]++;
+          }
+        }
+      }
+    }
+    time++;
+  }
+
+  let ans = 0;
+  for (let b = 1; b <= N; b++) {
+    for (let i = 0; i < M; i++) {
+      ans += board[b][i];
+    }
+  }
+
+  return ans;
+}
+
+function bfs(start, board, N, M) {
+  const [b, i] = start;
+  const value = board[b][i];
+  const queue = new Queue();
+  let count = 0;
+  queue.enqueue([b, i]);
+
+  // queue operation 수행
+  while (queue.length() > 0) {
+    const [cb, ci] = queue.dequeue();
+    if (board[cb][ci] !== value) continue;
+    board[cb][ci] = 0;
+    count++;
+    const ub = cb + 1;
+    const db = cb - 1;
+    const ri = (ci + 1) % M;
+    const li = (ci - 1 + M) % M;
+
+    if (ub <= N) queue.enqueue([ub, ci]);
+    if (db >= 1) queue.enqueue([db, ci]);
+    queue.enqueue([cb, ri]);
+    queue.enqueue([cb, li]);
+  }
+
+  // 좌표 리셋
+  if (count === 1) {
+    board[b][i] = value;
+    return 0;
+  }
+  return count;
+}
+
+function rotate([x, d, k], board, N, M) {
+  let index = 0;
+  while (index < N) {
+    index++;
+    if (index % x !== 0) continue;
+    const newBoard = new Array(M);
+    if (d === 0) {
+      // 시계방향 회전
+      for (let i = 0; i < M; i++) {
+        const ni = (i + k) % M;
+        newBoard[ni] = board[index][i];
+      }
+    } else if (d === 1) {
+      // 반시계방향 회전
+      for (let i = 0; i < M; i++) {
+        const ni = (i - k + M) % M;
+        newBoard[ni] = board[index][i];
+      }
+    }
+    board[index] = newBoard;
+  }
+}
+
+```
