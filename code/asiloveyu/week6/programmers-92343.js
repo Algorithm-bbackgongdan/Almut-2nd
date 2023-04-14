@@ -24,7 +24,7 @@ function solution(info, edges) {
         stack.push([newCandidate, sheep, wolf + 1]);
         // [3-4] cand가 늑대 노드이고 늑대를 초과시킬 경우
       } else {
-        stack.push([candidate.filter((node) => node !== cand), sheep, wolf]);
+        answers.push(sheep);
       }
     }
   }
