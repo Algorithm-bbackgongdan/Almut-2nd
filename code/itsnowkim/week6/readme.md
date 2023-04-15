@@ -183,3 +183,31 @@ def solution(board):
     return min([costmap[0][N-1][N-1],costmap[1][N-1][N-1],costmap[2][N-1][N-1],costmap[3][N-1][N-1]])
 ```
 
+# prog_92343 - 양과 늑대
+처음 시도는 bfs 로 접근하였지만, 단순히 그렇게 접근하면 모든 경우의 수를 순회하지 못하는 것을 알게 되었다.
+핵심은 "모든 경우의 수를 어떻게 순회할 수 있도록 하는가" 인 것으로 판단하였다.
+
+부모 노드는 무조건 먼저 방문하기 때문에 "위상 정렬" 로 접근하면 되지 않을까?
+
+...라고 생각하다가 bfs를 돌리면서 "다음에 방문할 모든 노드를 추가해버리면 되지 않나?" 로 생각을 바꿔서 시도했는데,
+간단하게 풀렸다!
+
+그 전에 itertools에 collection 구하는 것 처럼 구현하려고도 했는데, 실제로 사용하지는 않았지만 덕분에 따로 공부하게 되어서 추가한다.
+```python
+def gen_combinations(arr, n):
+    result =[] 
+
+    if n == 0: 
+        return [[]]
+
+    for i in range(0, len(arr)): 
+        elem = arr[i] 
+        rest_arr = arr[i + 1:] 
+        for C in gen_combinations(rest_arr, n-1): 
+            result.append([elem]+C) 
+              
+    return result
+
+
+print(gen_combinations([0,1,2,3,4,5],2))
+```
