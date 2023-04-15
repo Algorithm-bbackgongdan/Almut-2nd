@@ -85,10 +85,10 @@ function getChildNode(parent, info, edges) {
 - 전진하다가 A를 만날 경우 뒤로가서 나머지 알파벳을 변경하는 개별 경우의 수를 구합니다
   (예) BBAAAB 의 경우 totalStep은
   A를 지나갈 때 필요 스텝: A 길이 (3) - 1 + A와 연결하는 스텝 (2) = 4
-  A에 도달할 때 필요 스텝: 현재 포인터 (2) = 2
-  기본 총 스텝: 배열 길이 (6) - 1 = 5
-  A를 만나기 전에 돌아가는 경우 필요 스텝: 5 - 4 + 2 = 3
-- 이를 후진하다가 A를 만나는 경우도 반복합니다
+  A를 만나기 전에 돌아가는 경우 필요 스텝: 5 - 4 + 2 = 3 <- 더 우월합니다
+  - A에 도달할 때 필요 스텝 (뒤로가는 수): 현재 포인터 (2) = 2
+  - 기본 총 스텝: 배열 길이 (6) - 1 = 5
+- 이를 후진하다가 A를 만나는 경우에도 반복합니다
 - 각 경우의 수 중 최소값을 고르고 알파벳 변경 횟수를 더합니다
 
 ### 풀이 로직
@@ -148,4 +148,79 @@ function getCharChange(arr) {
   });
   return sum;
 }
+```
+
+
+## backjoon-42860
+
+풀이시간: 2h
+dfs, dp를 이용해 간단한 코드를 작성할 수 있었지만,
+dp 임에도 이전 최소비용이 이후 최소비용을 보장하지 않을 수 있다는 개념을 떠올리는데 어려움이 있었습니다.
+풀이가 잘 나오지 않아, 아이디어에 대한 힌트를 보고 풀었습니다.
+
+### 어려웠던 부분
+
+- 회전 시 가중되는 비용으로 인해 dp의 기본 원칙이 성립하지 않을 수 있다는 사실을 이해하기 어려웠습니다.
+- 3차원 dp를 구성하는데 다소 어려움이 있었습니다.
+
+### 풀이 방법
+
+- 반복문 스택을 이용해 DFS 길찾기를 시도합니다.
+- 이때, 각 DFS의 포인터들은 현재까지 비용을 포함합니다.
+- 포인터를 기준으로 상하좌우를 탐색합니다.
+  - 상하좌우 방향으로 셀에서 해당 방향과 일치하는 최소비용을 찾습니다.
+  - 해당 최소비용이 현재까지 비용보다 큰 경우, 이를 현재의 비용으로 교체합니다.
+  - 이후, 해당 방향으로 포인터를 stack에 삽입해 DFS를 수행합니다.
+- 마지막 셀에서 상하좌우 방향으로 최소값을 구한뒤 반환합니다.
+
+```javascript
+function solution(board) {
+  const N = board.length;
+  const costBoard = new Array(N)
+    .fill(0)
+    .map((_) => new Array(N).fill(0).map((_) => new Array(4).fill(-1)));
+  const directions = [
+    [1, 0],
+    [0, 1],
+    [-1, 0],
+    [0, -1],
+  ];
+  const stack = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 1],
+  ];
+  costBoard[0][0] = [0, 0, -1, -1];
+
+  // [1] Iterative stack을 이용해 DFS를 실행합니다
+  while (stack.length !== 0) {
+    const [x, y, cost, rotation] = stack.pop();
+    // [2] 각 방향에 대해서
+    for (let i = 0; i < 4; i++) {
+      // [2-1] 새로운 좌표를 구합니다
+      const [dx, dy] = directions[i];
+      const [nx, ny] = [x + dx, y + dy];
+      // [2-2] 해당 좌표가 유효한지 검증합니다 (테이블 내, 장애물이 아님)
+      if (!isValid([nx, ny], board, N)) continue;
+      // [2-3] 과거 진행방향(rotation)과 일치할 경우 100, 아니면 600을 더합니다
+      const dcost = rotation === i ? 100 : 600;
+      const ncost = dcost + cost;
+      // [2-4] 새로운 진행방향(i)에 해당하는 최소값을 꺼냅니다
+      const pcost = costBoard[ny][nx][i];
+      // [2-5] 최소값을 초기화 하거나, 최소값보다 작을 경우 이를 최소값으로 할당하고 stack에 넣습니다
+      if (pcost === -1 || ncost < pcost) {
+        costBoard[ny][nx][i] = ncost;
+        stack.push([nx, ny, ncost, i]);
+      }
+    }
+  }
+  return Math.min(...costBoard[N - 1][N - 1].filter((v) => v !== -1));
+}
+
+function isValid([x, y], board, N) {
+  if (x < 0 || x >= N) return false;
+  if (y < 0 || y >= N) return false;
+  if (board[y][x] === 1) return false;
+  return true;
+}
+
 ```
