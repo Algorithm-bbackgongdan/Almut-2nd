@@ -185,6 +185,7 @@ function solution(board) {
     [-1, 0],
     [0, -1],
   ];
+  // [*] stack 요소의 구성 [x, y, cost, direction]
   const stack = [
     [0, 0, 0, 0],
     [0, 0, 0, 1],
